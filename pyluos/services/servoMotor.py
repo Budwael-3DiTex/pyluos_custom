@@ -86,6 +86,7 @@ class ServoMotor(Service):
         self._slow_down_speed = 0
         self._set_encoder = False
         self._target_position_speed = [0,0]
+        self._connected = True
         
     # 5 DC Positions
     @property
@@ -238,6 +239,13 @@ class ServoMotor(Service):
     def target_position_speed(self, s):
         self._target_position_speed = s
         self._push_value("pos_sp", s)
+
+    @property
+    def connected(self):
+        return self._connected
+
+    def isConnected(self):
+        return self._connected
 
     def setToZero(self):
         self._push_value('reinit', None)
@@ -631,6 +639,7 @@ class ServoMotor(Service):
 
     def _update(self, new_state):
         Service._update(self, new_state)
+        
         if 'rot_position' in new_state:
             self._rot_position = new_state['rot_position']
             # print("pos = ",new_state['rot_position'])
@@ -655,7 +664,10 @@ class ServoMotor(Service):
             self._all_speeds = new_state['sx5']
         if 'buffer_size' in new_state:
             self._buffer_size = new_state['buffer_size']
-            
+        if 'connect' in new_state:
+            print("new_state = ",new_state)
+            self._connected = new_state['connect']
+
     def control(self):
         def change_config(rot_speed_report, rot_position_report, trans_speed_report, trans_position_report, current_report, compliant_mode, power_mode, power_ratio, rot_speed_mode, rot_speed, rot_position_mode, rot_position, trans_speed_mode, trans_speed, trans_position_mode, trans_position):
             # report config
