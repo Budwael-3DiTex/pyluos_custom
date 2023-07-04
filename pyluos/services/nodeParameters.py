@@ -8,6 +8,9 @@ class NodeParameters(Service):
         self._id_ring = None
         self._id_disk = None
 
+    def receiveParameters(self):
+        self._push_value('send_param', True)
+
     @property
     def max_motor_nb(self):
         """ Maximum Motor Number. """
@@ -31,6 +34,7 @@ class NodeParameters(Service):
     def _update(self, new_state):
         Service._update(self, new_state)
         if 'max_motor_nb' in new_state:
+            print('new_state = ',new_state)
             self._max_motor_nb = new_state['max_motor_nb']
         if 'id_ring' in new_state:
             self._id_ring = new_state['id_ring']
