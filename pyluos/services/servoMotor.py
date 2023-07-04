@@ -642,7 +642,6 @@ class ServoMotor(Service):
         
         if 'rot_position' in new_state:
             self._rot_position = new_state['rot_position']
-            # print("pos = ",new_state['rot_position'])
         if 'rot_speed' in new_state:
             self._rot_speed = new_state['rot_speed']
         if 'trans_position' in new_state:
@@ -665,7 +664,6 @@ class ServoMotor(Service):
         if 'buffer_size' in new_state:
             self._buffer_size = new_state['buffer_size']
         if 'connect' in new_state:
-            print("new_state = ",new_state)
             self._connected = new_state['connect']
 
     def control(self):
