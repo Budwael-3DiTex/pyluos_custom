@@ -525,7 +525,7 @@ class ServoMotor(Service):
             print("translation speed mode could be not enabled in the service please use 'device.service.trans_position_mode = True' to enable it")
         self._target_trans_position = s
         if hasattr(s, "__len__"):
-            self._push_value('target_trans_position', [len(s) * 4]) # multiplying by the size of float32
+            self._push_value('target_trans_position', [len(s) * 4], np.array(s, dtype=np.float32)) # multiplying by the size of float32
             self._push_data(np.array(s, dtype=np.float32))
         else :
             self._push_value("target_trans_position", s)
@@ -575,7 +575,7 @@ class ServoMotor(Service):
     def trans_position(self):
         if (self._config[ServoMotor._LINEAR_POSITION] != True):
             self.trans_position = True
-        return self._rot_position
+        return self._trans_position
 
     @trans_position.setter
     def trans_position(self, enable):
@@ -588,7 +588,7 @@ class ServoMotor(Service):
     def trans_speed(self):
         if (self._config[ServoMotor._LINEAR_SPEED] != True):
             self.trans_speed = True
-        return self._rot_speed
+        return self._trans_speed
 
     @trans_speed.setter
     def trans_speed(self, enable):
