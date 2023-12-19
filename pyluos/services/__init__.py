@@ -13,6 +13,7 @@ from .voltage import Voltage
 from .pipe import Pipe
 from .pressure import Pressure
 from .nodeParameters import NodeParameters
+from .app_bttn_motor import AppBttnMotor
 from .unknown import Unknown
 
 
@@ -33,6 +34,7 @@ __all__ = [
     'Pipe',
     'Pressure',
     'NodeParameters',
+    'AppBttnMotor',
     'Unknown'
 ]
 
@@ -52,5 +54,6 @@ name2mod = {
     'Pipe' : Pipe,
     'Pressure': Pressure,
     'NodeParameters': NodeParameters,
+    'AppBttnMotor': AppBttnMotor,
     'Unknown' : Unknown
 }

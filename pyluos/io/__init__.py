@@ -16,8 +16,11 @@ class IOHandler(object):
     def read(self, trials=5):
         try:
             data = self.recv()
+            # print("Data : ",data)
             return self.loads(data)
         except Exception as e:
+            data = self.recv()
+            print("DAta : ",data)
             logging.getLogger(__name__).debug('Msg read failed: {}'.format(str(e)))
             if trials == 0:
                 raise e
