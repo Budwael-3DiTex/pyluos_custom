@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 
-import imp
+try:
+    import imp
+    version = imp.load_source('pyluos.version', 'pyluos/version.py')
+except ImportError:
+    from importlib.machinery import SourceFileLoader
+    version = SourceFileLoader('pyluos.version', 'pyluos/version.py').load_module()
 
 from setuptools import setup, find_packages
-
-version = imp.load_source('pyluos.version', 'pyluos/version.py')
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -15,6 +18,8 @@ setup(name='pyluos',
       author_email="hello@luos.io",
       url="https://docs.luos.io/pages/high/pyluos.html",
       description="Python library to set the high level behavior of your device based on Luos embedded system.",
+      long_description=open('README.md').read(),
+      long_description_content_type='text/markdown',
       license='MIT',
       packages=find_packages(),
       install_requires=['future',
